@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Blood Donation Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* About Page Specific Styles */
+        .about-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
+
+        .about-section h1 {
+            text-align: center;
+            color: #dc3545;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            font-weight: bold;
+        }
+
+        .about-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about-section-box {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-left: 5px solid #dc3545;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-section-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(220, 53, 69, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .about-section-box:hover::before {
+            left: 100%;
+        }
+
+        .about-section-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(220, 53, 69, 0.2);
+        }
+
+        .about-section-box.active {
+            background: linear-gradient(135deg, #fff5f5, #ffffff);
+            border-left: 5px solid #28a745;
+            transform: scale(1.02);
+        }
+
+        .about-section-box h2 {
+            color: #dc3545;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .about-section-box h2::before {
+            content: '▶';
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .about-section-box.active h2::before {
+            transform: rotate(90deg);
+            color: #28a745;
+        }
+
+        .about-section-box.active h2 {
+            color: #28a745;
+        }
+
+        .initial-text {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .expanded-content {
+            display: none;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-top: 1rem;
+            border-left: 3px solid #dc3545;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .about-section-box.active .expanded-content {
+            display: block;
+        }
+
+        .expanded-content h3 {
+            color: #dc3545;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .expanded-content p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .expanded-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .expanded-content li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e9ecef;
+            color: #555;
+        }
+
+        .expanded-content li:before {
+            content: "✓ ";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .contact-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .contact-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            border-color: #dc3545;
+            transform: translateY(-2px);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-label {
+            font-weight: bold;
+            color: #dc3545;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-value {
+            color: #555;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .about-section h1 {
+                font-size: 2rem;
+            }
+            
+            .about-section-box {
+                padding: 1.5rem;
+            }
+            
+            .about-section-box h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>BloodDonor</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="register.html" class="nav-link">Register</a></li>
+                <li class="nav-item"><a href="donors.html" class="nav-link">Find Donor</a></li>
+                <li class="nav-item"><a href="emergency.html" class="nav-link">Emergency</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link active">About</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="about-section">
+        <div class="container">
+            <h1>About BloodDonor Portal</h1>
+            <div class="about-content">
+                <!-- Our Mission Section -->
+                <div class="about-section-box" id="missionBox">
+                    <h2>Our Mission</h2>
+                    <p class="initial-text">We connect blood donors with recipients in need, making the process of finding compatible blood types quick and efficient.</p>
+                    
+                    <div class="expanded-content">
+                        <h3>Making Blood Donation Accessible to Everyone</h3>
+                        <p>Our mission is to create a world where no one dies waiting for blood. We believe that access to safe blood should be a fundamental right, not a privilege.</p>
+                        
+                        <h3>Our Core Values:</h3>
+                        <ul>
+                            <li>Save lives through timely blood donations</li>
+                            <li>Create a reliable network of voluntary donors</li>
+                            <li>Ensure transparency in the donation process</li>
+                            <li>Promote regular blood donation awareness</li>
+                            <li>Support healthcare institutions with reliable blood supply</li>
+                        </ul>
+                        
+                        <p>Since our establishment, we have facilitated over 50,000 successful blood donations and helped save countless lives across the country.</p>
+                    </div>
+                </div>
+
+                <!-- What We Do Section -->
+                <div class="about-section-box" id="whatWeDoBox">
+                    <h2>What We Do</h2>
+                    <p class="initial-text">Our platform helps hospitals, blood banks, and individuals find suitable blood donors during emergencies and routine requirements.</p>
+                    
+                    <div class="expanded-content">
+                        <h3>Comprehensive Blood Donation Services</h3>
+                        <p>We provide end-to-end solutions for blood donation needs, from emergency requests to regular donation drives.</p>
+                        
+                        <h3>Our Services Include:</h3>
+                        <ul>
+                            <li>Emergency blood request management</li>
+                            <li>Donor registration and verification</li>
+                            <li>Real-time donor matching system</li>
+                            <li>Blood donation camp organization</li>
+                            <li>Donor health screening assistance</li>
+                            <li>24/7 emergency helpline support</li>
+                            <li>Mobile blood donation units coordination</li>
+                        </ul>
+                        
+                        <h3>Technology-Driven Solutions</h3>
+                        <p>Our advanced matching algorithm connects patients with the most suitable donors based on blood type, location, and availability, ensuring the fastest possible response time.</p>
+                    </div>
+                </div>
+
+                <!-- Contact Information Section -->
+                <div class="about-section-box" id="contactBox">
+                    <h2>Contact Information</h2>
+                    <p class="initial-text">Get in touch with us for any queries, support, or partnership opportunities.</p>
+                    
+                    <div class="expanded-content">
+                        <h3>We're Here to Help</h3>
+                        <p>Our dedicated team is available around the clock to assist you with any blood donation-related needs.</p>
+                        
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <div class="contact-icon">📧</div>
+                                <div class="contact-label">Email</div>
+                                <div class="contact-value">info@blooddonor.org</div>
+                                <div class="contact-value">support@blooddonor.org</div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">📞</div>
+                                <div class="contact-label">Phone</div>
+                                <div class="contact-value">+1-555-123-4567</div>
+                                <div class="contact-value">+1-555-987-6543</div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">🏢</div>
+                                <div class="contact-label">Address</div>
+                                <div class="contact-value">123 Healthcare Street</div>
+                                <div class="contact-value">Medical City, MC 12345</div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">🕒</div>
+                                <div class="contact-label">Working Hours</div>
+                                <div class="contact-value">Mon-Fri: 8AM-8PM</div>
+                                <div class="contact-value">Emergency: 24/7</div>
+                            </div>
+                        </div>
+                        
+                        <h3>Emergency Support</h3>
+                        <p>For urgent blood requirements, please use our <a href="emergency.html" style="color: #dc3545; text-decoration: underline;">Emergency Portal</a> for immediate assistance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 BloodDonor Portal. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Mobile menu toggle
+            $('.hamburger').click(function() {
+                $('.nav-menu').toggleClass('active');
+            });
+
+            // About section boxes click functionality
+            $('.about-section-box').click(function() {
+                // Close all other boxes
+                $('.about-section-box').not(this).removeClass('active');
+                
+                // Toggle current box
+                $(this).toggleClass('active');
+            });
+
+            // Close boxes when clicking outside
+            $(document).click(function(e) {
+                if (!$(e.target).closest('.about-section-box').length) {
+                    $('.about-section-box').removeClass('active');
+                }
+            });
+
+            // Prevent closing when clicking inside the box
+            $('.about-section-box').click(function(e) {
+                e.stopPropagation();
+            });
+        });
+    </script>
+</body>
+</html>

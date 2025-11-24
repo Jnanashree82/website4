@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency - Blood Donation Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Enhanced Emergency Page Styles */
+        .emergency-section {
+            background: linear-gradient(135deg, #fff5f5 0%, #f8f9fa 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .emergency-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+        
+        .emergency-header h1 {
+            color: #dc3545;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+        
+        .emergency-subtitle {
+            color: #666;
+            font-size: 1.3rem;
+            font-weight: 300;
+        }
+        
+        .emergency-alert {
+            background: linear-gradient(135deg, #ffeaa7, #ffd43b);
+            border: 3px solid #ffc107;
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            box-shadow: 0 10px 30px rgba(255, 193, 7, 0.3);
+        }
+        
+        .alert-icon {
+            font-size: 3rem;
+            flex-shrink: 0;
+            background: #856404;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .alert-content h3 {
+            color: #856404;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .alert-content p {
+            color: #856404;
+            font-size: 1.1rem;
+            margin: 0;
+            line-height: 1.6;
+        }
+        
+        .emergency-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-left: 6px solid #dc3545;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(220, 53, 69, 0.2);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #dc3545;
+            margin-bottom: 1rem;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .form-section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            border-left: 6px solid #dc3545;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .form-section h3 {
+            color: #dc3545;
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            border-bottom: 2px solid #f8f9fa;
+            padding-bottom: 0.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+            font-size: 1rem;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #dc3545;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+        }
+
+        .form-group.error input,
+        .form-group.error select,
+        .form-group.error textarea {
+            border-color: #dc3545;
+            background: #fff5f5;
+        }
+        
+        .form-notice {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            border-left: 6px solid #2196f3;
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.2);
+        }
+        
+        .notice-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+            background: #2196f3;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .form-notice p {
+            margin: 0;
+            color: #1565c0;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 18px 35px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            min-width: 200px;
+            justify-content: center;
+        }
+        
+        .btn-emergency {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+            box-shadow: 0 8px 25px rgba(220, 53, 69, 0.4);
+        }
+        
+        .btn-emergency:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(220, 53, 69, 0.6);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #6c757d, #5a6268);
+            color: white;
+            box-shadow: 0 8px 25px rgba(108, 117, 125, 0.3);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(108, 117, 125, 0.5);
+        }
+        
+        .btn-emergency:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        .btn-icon {
+            font-size: 1.4rem;
+        }
+        
+        .help-text {
+            color: #666;
+            font-size: 0.9rem;
+            display: block;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+        
+        .response-message {
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .response-message.success {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            color: #155724;
+            border: 3px solid #155724;
+        }
+        
+        .response-message.error {
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+            color: #721c24;
+            border: 3px solid #721c24;
+        }
+        
+        .emergency-process {
+            margin: 4rem 0;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .emergency-process h3 {
+            color: #dc3545;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            font-weight: 800;
+        }
+        
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+        
+        .process-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 15px;
+            background: #f8f9fa;
+            transition: transform 0.3s ease;
+        }
+
+        .process-step:hover {
+            transform: translateY(-5px);
+            background: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .step-number {
+            background: #dc3545;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            font-size: 1.3rem;
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+        }
+        
+        .step-content h4 {
+            color: #333;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .step-content p {
+            color: #666;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .emergency-contacts {
+            margin: 4rem 0;
+        }
+
+        .emergency-contacts h3 {
+            color: #dc3545;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            font-weight: 800;
+        }
+        
+        .contact-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .contact-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-card.urgent {
+            border: 4px solid #dc3545;
+            background: linear-gradient(135deg, #fff5f5, #ffe6e6);
+        }
+        
+        .contact-card.active {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(220, 53, 69, 0.4);
+            border-color: #ff0000;
+            background: linear-gradient(135deg, #fff5f5, #ffe6e6);
+        }
+        
+        .contact-card.active::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #ff0000, #dc3545);
+            animation: pulse 2s infinite;
+        }
+        
+        .contact-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #dc3545;
+            margin: 1rem 0;
+        }
+        
+        .contact-desc {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        
+        .btn-call-now {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+        }
+        
+        .btn-call-now:hover {
+            background: linear-gradient(135deg, #218838, #1ea085);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.6);
+        }
+        
+        .emergency-tips {
+            margin: 4rem 0;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .emergency-tips h3 {
+            color: #dc3545;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            font-weight: 800;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .tip-card {
+            background: #f8f9fa;
+            padding: 2rem 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-top: 6px solid #dc3545;
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-5px);
+            background: white;
+            box-shadow: 0 10px 25px rgba(220, 53, 69, 0.15);
+        }
+        
+        .tip-card h4 {
+            color: #dc3545;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .tip-card p {
+            color: #666;
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .form-group.error {
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        @media (max-width: 768px) {
+            .emergency-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .emergency-alert {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .form-notice {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem;
+            }
+
+            .emergency-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading animation */
+        .loading-dots {
+            display: inline-block;
+        }
+        
+        .loading-dots:after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+        
+        @keyframes dots {
+            0%, 20% { color: rgba(0,0,0,0); text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0); }
+            40% { color: white; text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0); }
+            60% { text-shadow: .25em 0 0 white, .5em 0 0 rgba(0,0,0,0); }
+            80%, 100% { text-shadow: .25em 0 0 white, .5em 0 0 white; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation remains the same -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>BloodDonor</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="register.html" class="nav-link">Register</a></li>
+                <li class="nav-item"><a href="donors.html" class="nav-link">Find Donor</a></li>
+                <li class="nav-item"><a href="emergency.html" class="nav-link active">Emergency</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="emergency-section">
+        <div class="container">
+            <!-- Header remains the same -->
+            <div class="emergency-header">
+                <h1>🚨 Emergency Blood Request</h1>
+                <p class="emergency-subtitle">Immediate assistance for critical blood requirements</p>
+            </div>
+
+            <!-- Alert section remains the same -->
+            <div class="emergency-alert">
+                <div class="alert-icon">⚠️</div>
+                <div class="alert-content">
+                    <h3>Urgent Blood Need Detected</h3>
+                    <p>Fill out the form below and we'll immediately notify compatible donors in your area. For immediate life-threatening emergencies, call 911 first.</p>
+                </div>
+            </div>
+
+            <!-- Stats section remains the same -->
+            <div class="emergency-stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="activeDonors">Loading...</div>
+                    <div class="stat-label">Active Donors Nearby</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">&lt; 30min</div>
+                    <div class="stat-label">Average Response Time</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Emergency Service</div>
+                </div>
+            </div>
+
+            <!-- Form remains the same structure but with enhanced styling -->
+            <form id="emergencyForm" class="emergency-form">
+                <!-- Form sections remain the same -->
+                <div class="form-section">
+                    <h3>Patient Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="patientName">Patient Name *</label>
+                            <input type="text" id="patientName" name="patientName" placeholder="Enter patient's full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactPerson">Contact Person Name *</label>
+                            <input type="text" id="contactPerson" name="contactPerson" placeholder="Your name" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other form sections remain the same -->
+                <div class="form-section">
+                    <h3>Hospital Details</h3>
+                    <div class="form-group">
+                        <label for="hospital">Hospital Name *</label>
+                        <input type="text" id="hospital" name="hospital" placeholder="Enter hospital name" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="hospitalCity">City *</label>
+                            <input type="text" id="hospitalCity" name="hospitalCity" placeholder="Enter city" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hospitalAddress">Hospital Address</label>
+                            <input type="text" id="hospitalAddress" name="hospitalAddress" placeholder="Street address (optional)">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Blood Requirements</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bloodType">Required Blood Type *</label>
+                            <select id="bloodType" name="bloodType" required>
+                                <option value="">Select Blood Type</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="units">Units Required *</label>
+                            <input type="number" id="units" name="units" min="1" max="20" value="2" required>
+                            <small class="help-text">Minimum 1 unit, maximum 20 units</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Urgency & Contact Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="urgency">Urgency Level *</label>
+                            <select id="urgency" name="urgency" required>
+                                <option value="">Select Urgency Level</option>
+                                <option value="critical">🚨 Critical (Within 2 hours)</option>
+                                <option value="high">⚠️ High (Within 6 hours)</option>
+                                <option value="medium">🔶 Medium (Within 24 hours)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact">Contact Number *</label>
+                            <input type="tel" id="contact" name="contact" placeholder="+1 (555) 123-4567" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Additional Information</h3>
+                    <div class="form-group">
+                        <label for="message">Special Requirements or Notes</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Any special requirements, medical conditions, or additional information that donors should know..."></textarea>
+                        <small class="help-text">This information will be shared with potential donors</small>
+                    </div>
+                </div>
+
+                <div class="form-notice">
+                    <div class="notice-icon">ℹ️</div>
+                    <p>By submitting this form, you agree to share this information with registered blood donors who can help in this emergency situation.</p>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-emergency" id="submitBtn">
+                        <span class="btn-icon">🚨</span>
+                        Send Emergency Request
+                    </button>
+                    <button type="button" class="btn btn-secondary" id="clearForm">
+                        <span class="btn-icon">🗑️</span>
+                        Clear Form
+                    </button>
+                </div>
+            </form>
+
+            <!-- Response Message Container -->
+            <div id="responseMessage" class="response-message" style="display: none;"></div>
+
+            <!-- Other sections (process, contacts, tips) remain the same -->
+            <div class="emergency-process">
+                <h3>What Happens After You Submit?</h3>
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Instant Matching</h4>
+                            <p>We immediately find donors with matching blood type in your city</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>SMS Notifications</h4>
+                            <p>Donors receive immediate SMS alerts with emergency details</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Direct Response</h4>
+                            <p>Available donors contact you directly using provided contact information</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Life Saved</h4>
+                            <p>Donors visit the hospital to donate blood and save lives</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="emergency-contacts">
+                <h3>Immediate Assistance</h3>
+                <div class="contact-cards">
+                    <div class="contact-card urgent" id="medicalEmergencyCard">
+                        <div class="contact-icon">🚑</div>
+                        <h4>Medical Emergency</h4>
+                        <p class="contact-number">911</p>
+                        <p class="contact-desc">For life-threatening emergencies</p>
+                        <button class="btn-call-now" onclick="callEmergency('911')">Call Now</button>
+                    </div>
+                    <div class="contact-card" id="bloodBankCard">
+                        <div class="contact-icon">🏥</div>
+                        <h4>Blood Bank Helpline</h4>
+                        <p class="contact-number">+1-555-BLOOD-HELP</p>
+                        <p class="contact-desc">24/7 blood bank assistance</p>
+                        <button class="btn-call-now" onclick="callEmergency('+1-555-BLOOD-HELP')">Call Now</button>
+                    </div>
+                    <div class="contact-card" id="patientCoordinatorCard">
+                        <div class="contact-icon">📞</div>
+                        <h4>Patient Coordinator</h4>
+                        <p class="contact-number">+1-555-DONOR-123</p>
+                        <p class="contact-desc">Direct patient support</p>
+                        <button class="btn-call-now" onclick="callEmergency('+1-555-DONOR-123')">Call Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="emergency-tips">
+                <h3>Emergency Tips</h3>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <h4>🚨 Stay Calm</h4>
+                        <p>Provide clear and accurate information to ensure quick response</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>🏥 Contact Hospital</h4>
+                        <p>Inform the hospital blood bank about your emergency request</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>📱 Keep Phone Ready</h4>
+                        <p>Stay available for calls from potential donors</p>
+                    </div>
+                    <div class="tip-card">
+                        <h4>📍 Share Location</h4>
+                        <p>Provide exact hospital location for donor convenience</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 BloodDonor Portal. All rights reserved. | Emergency Hotline: +1-555-BLOOD-HELP</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Enhanced JavaScript with better error handling and UX
+        $(document).ready(function() {
+            // Mobile menu toggle
+            $('.hamburger').click(function() {
+                $('.nav-menu').toggleClass('active');
+            });
+
+            // Initialize with live donor data
+            initializeLiveDonors();
+            
+            // Clear form button with confirmation
+            $('#clearForm').click(function() {
+                if ($('#emergencyForm')[0].checkValidity()) {
+                    if (confirm('Are you sure you want to clear the form? All entered data will be lost.')) {
+                        $('#emergencyForm')[0].reset();
+                        $('#responseMessage').hide().removeClass('success error');
+                        $('.form-group').removeClass('error');
+                    }
+                } else {
+                    $('#emergencyForm')[0].reset();
+                    $('#responseMessage').hide().removeClass('success error');
+                    $('.form-group').removeClass('error');
+                }
+            });
+            
+            // Real-time form validation
+            $('input, select, textarea').on('blur', function() {
+                validateField($(this));
+            });
+
+            // Form submission handling
+            $('#emergencyForm').on('submit', function(e) {
+                e.preventDefault();
+                
+                // Validate all fields
+                const isValid = validateEmergencyForm();
+                
+                if (!isValid) {
+                    showResponseMessage({
+                        status: 'error',
+                        message: 'Please fill all required fields correctly'
+                    });
+                    return;
+                }
+                
+                // Show loading state with better UX
+                const submitBtn = $('#submitBtn');
+                const originalText = submitBtn.html();
+                submitBtn.html('<span class="btn-icon">⏳</span> Sending Emergency Alert<span class="loading-dots"></span>')
+                        .prop('disabled', true);
+                
+                // Get form data
+                const formData = getFormData();
+                
+                // Simulate API call with better error handling
+                simulateEmergencyRequest(formData)
+                    .then(response => {
+                        showResponseMessage(response);
+                        
+                        if (response.status === 'success') {
+                            $('#emergencyForm')[0].reset();
+                            updateLiveDonorCount();
+                            // Scroll to success message
+                            $('html, body').animate({
+                                scrollTop: $('#responseMessage').offset().top - 100
+                            }, 1000);
+                        }
+                    })
+                    .catch(error => {
+                        showResponseMessage({
+                            status: 'error',
+                            message: 'Network error: Please check your connection and try again'
+                        });
+                    })
+                    .finally(() => {
+                        submitBtn.html(originalText).prop('disabled', false);
+                    });
+            });
+            
+            function validateField(field) {
+                const formGroup = field.closest('.form-group');
+                const value = field.val().trim();
+                
+                if (field.prop('required') && !value) {
+                    formGroup.addClass('error');
+                    return false;
+                }
+                
+                // Additional validation for specific fields
+                if (field.attr('name') === 'contact' && value) {
+                    const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+                    if (!phoneRegex.test(value.replace(/[\s\-\(\)]/g, ''))) {
+                        formGroup.addClass('error');
+                        return false;
+                    }
+                }
+                
+                if (field.attr('name') === 'units' && value) {
+                    const units = parseInt(value);
+                    if (units < 1 || units > 20) {
+                        formGroup.addClass('error');
+                        return false;
+                    }
+                }
+                
+                formGroup.removeClass('error');
+                return true;
+            }
+            
+            function validateEmergencyForm() {
+                let isValid = true;
+                const requiredFields = [
+                    'patientName', 
+                    'contactPerson', 
+                    'hospital', 
+                    'hospitalCity', 
+                    'bloodType', 
+                    'units', 
+                    'urgency', 
+                    'contact'
+                ];
+                
+                requiredFields.forEach(field => {
+                    const element = $(`[name="${field}"]`);
+                    if (!validateField(element)) {
+                        isValid = false;
+                    }
+                });
+                
+                return isValid;
+            }
+            
+            function getFormData() {
+                return {
+                    patientName: $('#patientName').val().trim(),
+                    contactPerson: $('#contactPerson').val().trim(),
+                    hospital: $('#hospital').val().trim(),
+                    hospitalCity: $('#hospitalCity').val().trim(),
+                    hospitalAddress: $('#hospitalAddress').val().trim(),
+                    bloodType: $('#bloodType').val(),
+                    units: $('#units').val(),
+                    urgency: $('#urgency').val(),
+                    contact: $('#contact').val().trim(),
+                    message: $('#message').val().trim()
+                };
+            }
+            
+            function simulateEmergencyRequest(formData) {
+                return new Promise((resolve) => {
+                    // Simulate API call delay
+                    setTimeout(() => {
+                        // Simulate success 95% of the time for demo
+                        if (Math.random() > 0.05) {
+                            const matchingDonors = Math.floor(Math.random() * 15) + 5;
+                            const availableDonors = Math.floor(matchingDonors * 0.7);
+                            
+                            resolve({
+                                status: 'success',
+                                message: '🚨 EMERGENCY ALERT SENT SUCCESSFULLY!',
+                                matching_donors: matchingDonors,
+                                available_donors: availableDonors,
+                                donors_contacted: Math.min(availableDonors, 5),
+                                emergency_details: formData,
+                                timestamp: new Date().toLocaleString()
+                            });
+                        } else {
+                            resolve({
+                                status: 'error',
+                                message: 'Service temporarily unavailable. Please try again in a few moments.'
+                            });
+                        }
+                    }, 2000);
+                });
+            }
+            
+            function showResponseMessage(response) {
+                const messageDiv = $('#responseMessage');
+                messageDiv.removeClass('success error').hide();
+                
+                if (response.status === 'success') {
+                    messageDiv.addClass('success').html(`
+                        <div style="text-align: center; margin-bottom: 2rem;">
+                            <h4 style="color: #155724; font-size: 1.8em; margin-bottom: 1rem;">✅ ${response.message}</h4>
+                            <p style="font-size: 1.2em; margin-bottom: 0.5rem;">Found ${response.matching_donors} matching donors in ${response.emergency_details.hospitalCity}</p>
+                            <p style="font-size: 1.1em; color: #0f5132;">${response.available_donors} available donors • ${response.donors_contacted} donors notified</p>
+                        </div>
+                        <div style="background: rgba(21, 87, 36, 0.1); padding: 1.5rem; border-radius: 10px; margin: 1.5rem 0;">
+                            <h5 style="color: #155724; margin-bottom: 1rem;">📋 Emergency Details:</h5>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                                <div><strong>Patient:</strong> ${response.emergency_details.patientName}</div>
+                                <div><strong>Hospital:</strong> ${response.emergency_details.hospital}</div>
+                                <div><strong>Blood Type:</strong> ${response.emergency_details.bloodType}</div>
+                                <div><strong>Units Needed:</strong> ${response.emergency_details.units}</div>
+                                <div><strong>Urgency:</strong> ${response.emergency_details.urgency}</div>
+                                <div><strong>Contact:</strong> ${response.emergency_details.contact}</div>
+                            </div>
+                        </div>
+                        <div style="background: rgba(255, 193, 7, 0.1); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                            <p style="margin: 0; color: #856404;">📱 SMS notifications have been sent to available donors. They will contact you directly.</p>
+                        </div>
+                    `).slideDown(500);
+                    
+                } else {
+                    messageDiv.addClass('error').html(`
+                        <h4 style="color: #721c24; font-size: 1.5em; margin-bottom: 1rem;">❌ ${response.message}</h4>
+                        <p style="margin-bottom: 1rem;">Please try the following:</p>
+                        <ul style="text-align: left; margin: 1rem 0;">
+                            <li>Check your internet connection</li>
+                            <li>Verify all required fields are filled</li>
+                            <li>Try again in a few moments</li>
+                            <li>Contact emergency services directly if urgent</li>
+                        </ul>
+                    `).slideDown(500);
+                }
+            }
+            
+            function initializeLiveDonors() {
+                updateLiveDonorCount();
+                setInterval(updateLiveDonorCount, 30000);
+            }
+            
+            function updateLiveDonorCount() {
+                // Simulate live donor count updates
+                const baseCount = 50;
+                const variation = Math.floor(Math.random() * 20) - 10;
+                const liveCount = Math.max(35, baseCount + variation);
+                $('#activeDonors').text(liveCount + '+');
+                
+                // Add visual feedback
+                $('#activeDonors').css({
+                    'transform': 'scale(1.1)',
+                    'color': '#ff0000'
+                });
+                
+                setTimeout(() => {
+                    $('#activeDonors').css({
+                        'transform': 'scale(1)',
+                        'color': '#dc3545'
+                    });
+                }, 300);
+            }
+        });
+
+        function callEmergency(number) {
+            const cardId = number === '911' ? 'medicalEmergencyCard' : 
+                          number === '+1-555-BLOOD-HELP' ? 'bloodBankCard' : 'patientCoordinatorCard';
+            
+            const card = document.getElementById(cardId);
+            
+            // Add active class with animation
+            card.classList.add('active');
+            
+            // Show enhanced confirmation
+            const contactName = card.querySelector('h4').textContent;
+            if (confirm(`🚨 Calling: ${contactName}\n\nNumber: ${number}\n\nPlease use your phone to complete the call.\n\nClick OK to continue or Cancel to stay on this page.`)) {
+                // In a real app, this would trigger phone call
+                console.log(`Initiating call to: ${number}`);
+                // window.location.href = `tel:${number}`;
+            }
+            
+            // Remove active class
+            setTimeout(() => {
+                card.classList.remove('active');
+            }, 3000);
+        }
+
+        // Enhanced live donor simulation
+        function simulateDonorActivity() {
+            setInterval(() => {
+                const donorsElement = document.getElementById('activeDonors');
+                const currentText = donorsElement.textContent;
+                const currentCount = parseInt(currentText) || 50;
+                const activity = Math.random();
+                
+                let newCount;
+                if (activity > 0.7) {
+                    newCount = currentCount + Math.floor(Math.random() * 3) + 1; // Increase
+                } else if (activity < 0.3) {
+                    newCount = Math.max(35, currentCount - Math.floor(Math.random() * 2) - 1); // Decrease
+                } else {
+                    newCount = currentCount; // No change
+                }
+                
+                donorsElement.textContent = newCount + '+';
+                
+                // Visual feedback
+                donorsElement.style.transition = 'all 0.5s ease';
+                donorsElement.style.transform = 'scale(1.1)';
+                donorsElement.style.color = activity > 0.7 ? '#28a745' : '#dc3545';
+                
+                setTimeout(() => {
+                    donorsElement.style.transform = 'scale(1)';
+                    donorsElement.style.color = '#dc3545';
+                }, 500);
+                
+            }, 10000); // Update every 10 seconds
+        }
+
+        // Initialize enhanced features
+        document.addEventListener('DOMContentLoaded', function() {
+            simulateDonorActivity();
+            
+            // Add intersection observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe elements for scroll animations
+            document.querySelectorAll('.stat-card, .form-section, .process-step, .contact-card, .tip-card').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
